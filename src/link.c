@@ -1,6 +1,18 @@
 #include "../includes/lem_in.h"
 
-t_link *add_link(t_link **links, char *start, char *end)
+int getRoomId(t_room *rooms, char *name)
+{
+    t_room *current = rooms;
+    while (current != NULL) {
+        if (strcmp(current->name, name) == 0) {
+            return current->id;
+        }
+        current = current->next;
+    }
+    return -1;
+}
+
+t_link *add_link(t_link **links, char *start, char *end, t_room *rooms)
 {
     t_link *new_link = malloc(sizeof(t_link));
     if (new_link == NULL) {
@@ -9,6 +21,8 @@ t_link *add_link(t_link **links, char *start, char *end)
     }
     new_link->start = strdup(start);
     new_link->end = strdup(end);
+    new_link->startId = getRoomId(rooms, start);
+    new_link->endId = getRoomId(rooms, end);
     new_link->next = *links;
     *links = new_link;
     return new_link;

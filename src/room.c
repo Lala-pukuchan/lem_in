@@ -1,5 +1,7 @@
 #include "../includes/lem_in.h"
 
+int roomCount=0;
+
 t_room *add_room(t_room **rooms, char *name, int x, int y, int is_start, int is_end)
 {
     t_room *new_room = malloc(sizeof(t_room));
@@ -7,6 +9,8 @@ t_room *add_room(t_room **rooms, char *name, int x, int y, int is_start, int is_
         printf("Memory allocation failed.\n");
         exit(1);
     }
+    new_room->id = roomCount; // Assign the room ID
+    roomCount++; // Increment the room count
     new_room->name = strdup(name);
     new_room->x = x;
     new_room->y = y;
