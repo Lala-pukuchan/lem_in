@@ -20,16 +20,9 @@ void exist_start_end(t_room *rooms)
     }
 }
 
-void exit_pass(t_room *rooms, t_link *links)
-{
-    (void)rooms;
-    (void)links;
-}
-
-int check_solution(t_room *rooms, t_link *links)
+int check_solution(t_room *rooms)
 {
     exist_start_end(rooms);
-    exit_pass(rooms, links);
     return 0;
 }
 
@@ -40,7 +33,6 @@ int check(int number_of_ants, t_room *rooms, t_link *links, int startFlag, int e
         printf("No start or end.\n");
         return 1;
     }
-    printf("Checking...%d\n", number_of_ants);
     if (number_of_ants <= 0 || number_of_ants > INT_MAX)
     {
         printf("Invalid number of ants.\n");
@@ -51,5 +43,5 @@ int check(int number_of_ants, t_room *rooms, t_link *links, int startFlag, int e
         printf("Invalid room or link.\n");
         return 1;
     }
-    return check_solution(rooms, links);
+    return check_solution(rooms);
 }

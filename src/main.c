@@ -6,7 +6,7 @@
 /*   By: rukobaya < rukobaya@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:24:34 by rukobaya          #+#    #+#             */
-/*   Updated: 2024/04/18 20:14:15 by rukobaya         ###   ########.fr       */
+/*   Updated: 2024/04/18 22:02:14 by rukobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ int main() {
     int state = 0;
     int startFlag = 0;
     int endFlag = 0;
-
-    char *startRoomName = NULL;
-    char *endRoomName = NULL;
+    int startRoomId = -1;
+    int endRoomId = -1;
 
     while (fgets(input, MAX_INPUT_SIZE, stdin) != NULL) {
         input[strcspn(input, "\n")] = 0;
@@ -56,11 +55,11 @@ int main() {
                 int y = ft_atoi(strtok(NULL, " "));
                 if (startFlag == 1) {
                     rooms = add_room(&rooms, name, x, y, 1, 0);
-                    startRoomName = ft_strdup(name);
+                    startRoomId = rooms->id;
                     startFlag++;
                 } else if (endFlag == 1) {
                     rooms = add_room(&rooms, name, x, y, 0, 1);
-                    endRoomName = ft_strdup(name);
+                    endRoomId = rooms->id;
                     endFlag++;
                 } else {
                     rooms = add_room(&rooms, name, x, y, 0, 0);
@@ -88,21 +87,10 @@ int main() {
         return 1;
     }
 
-    for (t_room *room = rooms; room != NULL; room = room->next) {
-        printf("struct Room: %s %d %d %d %d %d\n", room->name, room->x, room->y, room->is_start, room->is_end, room->id);
-    }
-    for (t_link *link = links; link != NULL; link = link->next) {
-        printf("struct Link: %s %s %d %d\n", link->start, link->end, link->startId, link->endId);
-    }
-
-
-
-    //bfs_with_ant(rooms, links, startRoomName, endRoomName, NULL, NULL);
+    bfs_with_ant(rooms, links, startRoomId, endRoomId);
 
     free_rooms(&rooms);
     free_links(&links);
-    free(startRoomName);
-    free(endRoomName);
 
     system("leaks lem-in");
 

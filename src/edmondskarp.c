@@ -1,14 +1,9 @@
 #include "../includes/lem_in.h"
 
-int bfs_with_ant(t_room *rooms, t_link *links, char *s, char *t, char ***paths, int *path_count)
-{
-    (void)rooms;
-    (void)links;
-    (void)s;
-    (void)t;
-    (void)paths;
-    (void)path_count;
 
+int bfs_with_ant(t_room *rooms, t_link *links, int startRoomId, int endRoomId)
+{
+    t_path *paths = NULL;
     int room_count = 0;
     t_room *tmp = rooms;
     while (tmp)
@@ -20,63 +15,31 @@ int bfs_with_ant(t_room *rooms, t_link *links, char *s, char *t, char ***paths, 
     int visited[room_count];
     memset(visited, 0, sizeof(visited));
 
-    char **queue = malloc(room_count * sizeof(char *));
-    printf("room_count: %d\n", room_count);
+    int *queue = malloc(room_count * sizeof(int));
     int front = 0, rear = 0;
-    queue[rear++] = s;
-    visited[get_room_index(rooms, s)] = 1;
-
-    (void)queue;
-    (void)front;
-    (void)rear;
-    (void)visited;
+    queue[rear++] = startRoomId;
+    visited[startRoomId] = 1;
 
     while (front < rear)
     {
-        char *u = queue[front++];
-        if (!strcmp(u, t))
+        int uId = queue[front++];
+        if (uId == endRoomId)
         {
-            save_path(paths, path_count, queue, front);
+            paths = add_path(&paths, queue, rear);
             break;
         }
-        for (t_link *link = links; link; link = link->next) {
-            // `u`がリンクの始点の場合、そのリンクの終点へ進む
-            if (strcmp(link->start, u) == 0 && !visited[get_room_index(rooms, link->end)]) {
-                printf("rear: %d %s\n", rear, link->end);
-                queue[rear++] = link->end;
-                visited[get_room_index(rooms, link->end)] = 1;
+        for (t_link *link = links; link; link = link->next)
+        {
+            printf("link->startId: %d, uId: %d, visited[link->endId]: %d\n", link->startId, uId, visited[link->endId]);
+            if (link->startId == uId && !visited[link->endId])
+            {
+                queue[rear++] = link->endId;
+                visited[link->endId] = 1;
             }
-            //// `u`がリンクの終点の場合、そのリンクの始点へ戻る（逆戻りを許容する場合）
-            //else if (strcmp(link->end, u) == 0 && !visited[get_room_index(rooms, link->start)]) {
-            //    queue[rear++] = link->start;
-            //    visited[get_room_index(rooms, link->start)] = 1;
-            //}
         }
-
     }
-    free(queue);
+    printf("paths->path[0]: %d, paths->path[1]: %d\n", paths->path[0], paths->path[1]);
+    free_paths(&paths);
     return 0;
 }
 
-void save_path(char ***paths, int *path_count, char **queue, int queue_size)
-{
-    paths[*path_count] = malloc(queue_size * sizeof(char *));
-    for (int i = 0; i < queue_size; i++)
-    {
-        paths[*path_count][i] = strdup(queue[i]);
-    }
-    (*path_count)++;
-}
-
-int get_room_index(t_room *rooms, char *name)
-{
-    int index = 0;
-    for (t_room *tmp = rooms; tmp; tmp = tmp->next, index++)
-    {
-        if (strcmp(tmp->name, name) == 0)
-        {
-            return index;
-        }
-    }
-    return -1;
-}

@@ -19,12 +19,16 @@ typedef struct s_room {
 } t_room;
 
 typedef struct s_link {
-    char *start; // Consider renaming to startName if you keep both name and ID
-    char *end;   // Consider renaming to endName
-    int startId; // New field for start room ID
-    int endId;   // New field for end room ID
+    int startId;
+    int endId;
     struct s_link *next;
 } t_link;
+
+typedef struct s_path {
+    int *path;
+    int path_size;
+    struct s_path *next;
+} t_path;
 
 
 void free_rooms(t_room **rooms);
@@ -32,9 +36,10 @@ void free_links(t_link **links);
 t_room *add_room(t_room **rooms, char *name, int x, int y, int is_start, int is_end);
 t_link *add_link(t_link **links, char *start, char *end, t_room *rooms);
 int check(int number_of_ants, t_room *rooms, t_link *links, int startFlag, int endFlag);
-int bfs_with_ant(t_room *rooms, t_link *links, char *s, char *t, char ***paths, int *path_count);
-void save_path(char ***paths, int *path_count, char **queue, int queue_size);
+int bfs_with_ant(t_room *rooms, t_link *links, int startRoomId, int endRoomId);
 int get_room_index(t_room *rooms, char *name);
+t_path *add_path(t_path **paths, int *queue, int queue_size);
+void free_paths(t_path **paths);
 
 #endif
 

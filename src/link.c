@@ -2,14 +2,15 @@
 
 int getRoomId(t_room *rooms, char *name)
 {
+    int id = 0;
     t_room *current = rooms;
     while (current != NULL) {
         if (strcmp(current->name, name) == 0) {
-            return current->id;
+            id = current->id;
         }
         current = current->next;
     }
-    return -1;
+    return id;
 }
 
 t_link *add_link(t_link **links, char *start, char *end, t_room *rooms)
@@ -19,8 +20,6 @@ t_link *add_link(t_link **links, char *start, char *end, t_room *rooms)
         printf("Memory allocation failed.\n");
         exit(1);
     }
-    new_link->start = strdup(start);
-    new_link->end = strdup(end);
     new_link->startId = getRoomId(rooms, start);
     new_link->endId = getRoomId(rooms, end);
     new_link->next = *links;
@@ -35,8 +34,6 @@ void free_links(t_link **links)
     t_link *current = *links;
     while (current != NULL) {
         t_link *next = current->next;
-        free(current->start);
-        free(current->end);
         free(current);
         current = next;
     }
