@@ -6,7 +6,7 @@
 /*   By: rukobaya < rukobaya@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:24:34 by rukobaya          #+#    #+#             */
-/*   Updated: 2024/04/18 16:16:50 by rukobaya         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:22:26 by rukobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,15 @@ int main() {
                 char *name = strtok(input, " ");
                 int x = ft_atoi(strtok(NULL, " "));
                 int y = ft_atoi(strtok(NULL, " "));
-                rooms = add_room(&rooms, name, x, y);
+                if (startFlag == 1) {
+                    rooms = add_room(&rooms, name, x, y, 1, 0);
+                    startFlag++;
+                } else if (endFlag == 1) {
+                    rooms = add_room(&rooms, name, x, y, 0, 1);
+                    endFlag++;
+                } else {
+                    rooms = add_room(&rooms, name, x, y, 0, 0);
+                }
                 continue;
             }
         }
@@ -76,7 +84,7 @@ int main() {
     }
 
     for (t_room *room = rooms; room != NULL; room = room->next) {
-        printf("struct Room: %s %d %d\n", room->name, room->x, room->y);
+        printf("struct Room: %s %d %d %d %d\n", room->name, room->x, room->y, room->is_start, room->is_end);
     }
     for (t_link *link = links; link != NULL; link = link->next) {
         printf("struct Link: %s %s\n", link->start, link->end);

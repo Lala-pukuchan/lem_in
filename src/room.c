@@ -1,6 +1,6 @@
 #include "../includes/lem_in.h"
 
-t_room *add_room(t_room **rooms, char *name, int x, int y)
+t_room *add_room(t_room **rooms, char *name, int x, int y, int is_start, int is_end)
 {
     t_room *new_room = malloc(sizeof(t_room));
     if (new_room == NULL) {
@@ -10,6 +10,8 @@ t_room *add_room(t_room **rooms, char *name, int x, int y)
     new_room->name = strdup(name);
     new_room->x = x;
     new_room->y = y;
+    new_room->is_start = is_start;
+    new_room->is_end = is_end;
     new_room->next = *rooms;
     *rooms = new_room;
     return new_room;
