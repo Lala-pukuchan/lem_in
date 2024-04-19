@@ -41,7 +41,7 @@ void	find_path(t_link *links, int startRoomId, int endRoomId, int visited[],
 {
 	int	*queue;
 	int	front;
-    int	rear;
+	int	rear;
 	int	*predecessors;
 	int	uId;
 	int	path_length;
@@ -76,8 +76,8 @@ void	find_path(t_link *links, int startRoomId, int endRoomId, int visited[],
 			}
 			*paths = add_path(paths, path, path_length);
 			free(path);
-            free(queue);
-            free(predecessors);
+			free(queue);
+			free(predecessors);
 			return ;
 			break ;
 		}
