@@ -80,7 +80,7 @@ int	find_path(t_link *links, int startRoomId, int endRoomId, int visited[],
 			free(path);
 			free(queue);
 			free(predecessors);
-			return false;
+			return true;
 		}
 		for (t_link *link = links; link; link = link->next)
 		{
