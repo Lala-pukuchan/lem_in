@@ -25,8 +25,8 @@ typedef struct s_link {
 } t_link;
 
 typedef struct s_path {
-    int *path;
-    int path_size;
+    int *room_ids;
+    int room_count;
     struct s_path *next;
 } t_path;
 
