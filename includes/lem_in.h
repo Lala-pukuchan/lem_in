@@ -23,6 +23,7 @@ typedef struct s_link
 	int				startId;
 	int				endId;
 	struct s_link	*next;
+	bool			opposite;
 }					t_link;
 
 typedef struct s_path
@@ -45,5 +46,6 @@ int					bfs_with_ant(t_room *rooms, t_link *links, int startRoomId,
 int					get_room_index(t_room *rooms, char *name);
 t_path				*add_path(t_path **paths, int *queue, int queue_size);
 void				free_paths(t_path **paths);
-
+void				output_details(int number_of_ants, t_room *rooms_head,
+						t_link *links_head);
 #endif

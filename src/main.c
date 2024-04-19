@@ -6,7 +6,7 @@
 /*   By: rukobaya < rukobaya@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:24:34 by rukobaya          #+#    #+#             */
-/*   Updated: 2024/04/19 15:23:08 by rukobaya         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:44:18 by rukobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	main(void)
 		return (1);
 	}
 	bfs_with_ant(rooms, links, startRoomId, endRoomId);
+	output_details(number_of_ants, rooms, links);
 	free_rooms(&rooms);
 	free_links(&links);
 	system("leaks lem-in");
