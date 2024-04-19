@@ -6,7 +6,7 @@
 /*   By: rukobaya < rukobaya@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:24:34 by rukobaya          #+#    #+#             */
-/*   Updated: 2024/04/19 13:15:02 by rukobaya         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:23:08 by rukobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(void)
 		{
 			start = strtok(input, "-");
 			end = strtok(NULL, "-");
-			links = add_link(&links, start, end, rooms);
+			add_link(&links, start, end, rooms);
 		}
 	}
 	if (ferror(stdin))

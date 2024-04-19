@@ -18,7 +18,7 @@ int	getRoomId(t_room *rooms, char *name)
 	return (id);
 }
 
-t_link	*add_link(t_link **links, char *start, char *end, t_room *rooms)
+t_link	*add_link_both_order(t_link **links, char *start, char *end, t_room *rooms)
 {
 	t_link	*new_link;
 
@@ -33,6 +33,12 @@ t_link	*add_link(t_link **links, char *start, char *end, t_room *rooms)
 	new_link->next = *links;
 	*links = new_link;
 	return (new_link);
+}
+
+void add_link(t_link **links, char *start, char *end, t_room *rooms)
+{
+	add_link_both_order(links, start, end, rooms);
+	add_link_both_order(links, end, start, rooms);
 }
 
 void	free_links(t_link **links)

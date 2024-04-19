@@ -1,13 +1,18 @@
 5
 # rooms
 ##start
-room0 100 500
-room1 400 500
-room2 400 800
+0 100 500
+1 400 500
+2 400 800
+3 400 900
+4 400 900
 ##end
-room3 400 900
+5 400 900
 # links
-room0-room1
-room1-room3
-room0-room2
-room2-room3
+1-0
+1-5
+2-0
+2-5
+0-3
+3-4
+4-5
