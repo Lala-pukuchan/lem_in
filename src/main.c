@@ -6,7 +6,7 @@
 /*   By: rukobaya < rukobaya@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:24:34 by rukobaya          #+#    #+#             */
-/*   Updated: 2024/04/24 10:04:20 by rukobaya         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:51:42 by rukobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,32 @@ int	main(void)
 		pathCount++;
 	}
 	output_details(number_of_ants, rooms, links);
+    // Allocate memory for the ants
+    t_ant *ants = malloc(number_of_ants * sizeof(t_ant));
+    if (ants == NULL) {
+        fprintf(stderr, "Failed to allocate memory for ants.\n");
+        return 1; // Exit if memory allocation fails
+    }
+
+    // Initialize current position of each ant
+    for (int i = 0; i < number_of_ants; i++) {
+        ants[i].ant_id = i + 1;
+        ants[i].path_index = -1; // Initialize to -1 indicating no path assigned yet
+        ants[i].current_position = 0; // Start at the beginning of the path
+    }
+
+    // Distribute ants across paths
+	printf("pathCount: %d\n", pathCount);
+    distribute_ants(&paths, pathCount, number_of_ants, ants);
+	move_ants(&paths, ants, number_of_ants, endRoomId);
+
+    // Here you would add logic to move ants along the paths and possibly print their movements
+
+    // Free allocated resources
+    free(ants); // Free the memory allocated for ants
 	free_rooms(&rooms);
 	free_links(&links);
+	free_paths(&paths);
 	system("leaks lem-in");
 	return (0);
 }

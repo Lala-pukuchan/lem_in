@@ -56,6 +56,6 @@ void				output_details(int number_of_ants, t_room *rooms_head,
 						t_link *links_head);
 void				reverse_paths(t_path **paths);
 void				distribute_ants(t_path **paths, int num_paths, int num_ants, t_ant *ants);
-void move_ants(t_path **paths, int num_paths, t_ant *ants, int num_ants);
+void move_ants(t_path **paths, t_ant *ants, int num_ants, int end_room_id);
 
 #endif

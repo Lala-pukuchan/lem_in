@@ -153,8 +153,6 @@ t_path	*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId, int endRoomI
 			break ;
 		}
 	}
-	
-	//free_paths(&paths);
 	free(visited);
 	return (paths);
 }
