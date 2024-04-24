@@ -1,6 +1,6 @@
 #include "../includes/lem_in.h"
-#include <stdlib.h> // Include for malloc and NULL
 #include <stdbool.h> // For using bool type
+#include <stdlib.h>  // Include for malloc and NULL
 
 int	*create_empty_visited(int room_count, int startRoomId)
 {
@@ -80,7 +80,7 @@ int	find_path(t_link *links, int startRoomId, int endRoomId, int visited[],
 			free(path);
 			free(queue);
 			free(predecessors);
-			return true;
+			return (true);
 		}
 		for (t_link *link = links; link; link = link->next)
 		{
@@ -94,7 +94,7 @@ int	find_path(t_link *links, int startRoomId, int endRoomId, int visited[],
 	}
 	free(queue);
 	free(predecessors);
-	return false;
+	return (false);
 }
 
 bool	exist_second_step(t_link *links, int startRoomId, int *visited)
@@ -115,13 +115,15 @@ bool	exist_second_step(t_link *links, int startRoomId, int *visited)
 	return (false);
 }
 
-t_path	*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId, int endRoomId)
+t_path	*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId,
+		int endRoomId)
 {
 	t_path	*paths;
 	int		room_count;
 	t_room	*tmp;
 	int		*visited;
 	int		*tmp2;
+	int		res;
 
 	paths = NULL;
 	room_count = 0;
@@ -133,11 +135,13 @@ t_path	*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId, int endRoomI
 		room_count++;
 	}
 	visited = create_empty_visited(room_count, startRoomId);
-	int res = 0;
+	res = 0;
 	while (1)
 	{
-		res = find_path(links, startRoomId, endRoomId, visited, &paths, room_count);
-		if (res == false) {
+		res = find_path(links, startRoomId, endRoomId, visited, &paths,
+				room_count);
+		if (res == false)
+		{
 			printf("No path found\n");
 			break ;
 		}

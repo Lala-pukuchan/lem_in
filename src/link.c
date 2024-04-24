@@ -18,7 +18,8 @@ int	getRoomId(t_room *rooms, char *name)
 	return (id);
 }
 
-t_link	*add_link_both_order(t_link **links, char *start, char *end, t_room *rooms, bool opposite)
+t_link	*add_link_both_order(t_link **links, char *start, char *end,
+		t_room *rooms, bool opposite)
 {
 	t_link	*new_link;
 
@@ -36,12 +37,12 @@ t_link	*add_link_both_order(t_link **links, char *start, char *end, t_room *room
 	return (new_link);
 }
 
-void add_link(t_link **links, char *start, char *end, t_room *rooms)
+void	add_link(t_link **links, char *start, char *end, t_room *rooms)
 {
+	t_link	*current;
+
 	add_link_both_order(links, start, end, rooms, false);
 	add_link_both_order(links, end, start, rooms, true);
-
-	t_link	*current;
 	current = *links;
 	while (current != NULL)
 	{

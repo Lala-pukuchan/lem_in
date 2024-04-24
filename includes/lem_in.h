@@ -33,11 +33,12 @@ typedef struct s_path
 	struct s_path	*next;
 }					t_path;
 
-typedef struct s_ant {
-    int ant_id;
-    int path_index; // Index of the path this ant is on
+typedef struct s_ant
+{
+	int				ant_id;
+	int path_index;       // Index of the path this ant is on
 	int current_position; // Index of the current room in the path
-} t_ant;
+}					t_ant;
 
 void				free_rooms(t_room **rooms);
 void				free_links(t_link **links);
@@ -55,7 +56,9 @@ void				free_paths(t_path **paths);
 void				output_details(int number_of_ants, t_room *rooms_head,
 						t_link *links_head);
 void				reverse_paths(t_path **paths);
-void				distribute_ants(t_path **paths, int num_paths, int num_ants, t_ant *ants);
-void move_ants(t_path **paths, t_ant *ants, int num_ants, int end_room_id);
+void				distribute_ants(t_path **paths, int num_paths, int num_ants,
+						t_ant *ants);
+void				move_ants(t_path **paths, t_ant *ants, int num_ants,
+						int end_room_id);
 
 #endif

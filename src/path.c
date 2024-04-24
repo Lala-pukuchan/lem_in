@@ -20,10 +20,13 @@ t_path	*add_path(t_path **paths, int *queue, int queue_size)
 
 void	free_paths(t_path **paths)
 {
-	t_path *current = *paths;
+	t_path	*current;
+	t_path	*next;
+
+	current = *paths;
 	while (current != NULL)
 	{
-		t_path *next = current->next;
+		next = current->next;
 		free(current->room_ids);
 		free(current);
 		current = next;
@@ -31,15 +34,17 @@ void	free_paths(t_path **paths)
 	*paths = NULL;
 }
 
-void reverse_paths(t_path **paths) {
-    t_path *prev = NULL;
-    t_path *current = *paths;
-    t_path *next = NULL;
-    while (current != NULL) {
-        next = current->next;  // Store next
-        current->next = prev;  // Reverse current node's pointer
-        prev = current;        // Move pointers one position ahead
-        current = next;
-    }
-    *paths = prev;  // Reset the head to the new front
+void	reverse_paths(t_path **paths)
+{
+	t_path *prev = NULL;
+	t_path *current = *paths;
+	t_path *next = NULL;
+	while (current != NULL)
+	{
+		next = current->next; // Store next
+		current->next = prev; // Reverse current node's pointer
+		prev = current;       // Move pointers one position ahead
+		current = next;
+	}
+	*paths = prev; // Reset the head to the new front
 }
