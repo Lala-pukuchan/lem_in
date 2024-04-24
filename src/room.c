@@ -2,6 +2,20 @@
 
 int		roomCount = 0;
 
+void	initializeRoomNames(int numRooms)
+{
+	roomNames = malloc(numRooms * sizeof(char *));
+	if (roomNames == NULL)
+	{
+		printf("Memory allocation failed for room names.\n");
+		exit(1);
+	}
+	for (int i = 0; i < numRooms; i++)
+	{
+		roomNames[i] = NULL;
+	}
+}
+
 t_room	*add_room(t_room **rooms, char *name, int x, int y, int is_start,
 		int is_end)
 {
@@ -13,9 +27,10 @@ t_room	*add_room(t_room **rooms, char *name, int x, int y, int is_start,
 		printf("Memory allocation failed.\n");
 		exit(1);
 	}
-	new_room->id = roomCount; // Assign the room ID
-	roomCount++;              // Increment the room count
+	new_room->id = roomCount;
+	roomCount++;
 	new_room->name = strdup(name);
+	roomNames[new_room->id] = strdup(name);
 	new_room->x = x;
 	new_room->y = y;
 	new_room->is_start = is_start;
@@ -27,13 +42,25 @@ t_room	*add_room(t_room **rooms, char *name, int x, int y, int is_start,
 
 void	free_rooms(t_room **rooms)
 {
-	t_room *current = *rooms;
+	t_room	*current;
+	t_room	*next;
+
+	current = *rooms;
 	while (current != NULL)
 	{
-		t_room *next = current->next;
+		next = current->next;
 		free(current->name);
 		free(current);
 		current = next;
 	}
 	*rooms = NULL;
+}
+
+void	freeRoomNames(void)
+{
+	for (int i = 0; i < MAX_ROOM_SIZE; i++)
+	{
+		free(roomNames[i]);
+	}
+	free(roomNames);
 }

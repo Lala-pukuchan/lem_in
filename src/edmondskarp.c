@@ -1,6 +1,4 @@
 #include "../includes/lem_in.h"
-#include <stdbool.h> // For using bool type
-#include <stdlib.h>  // Include for malloc and NULL
 
 int	*create_empty_visited(int room_count, int startRoomId)
 {
@@ -11,7 +9,6 @@ int	*create_empty_visited(int room_count, int startRoomId)
 		return (NULL);
 	memset(visited, 0, room_count * sizeof(int));
 	visited[startRoomId] = 1;
-	printf("startRoomId: %d\n", startRoomId);
 	return (visited);
 }
 
@@ -23,7 +20,6 @@ void	update_visited(int *visited, t_path *paths, int room_count,
 	for (int i = 0; i < room_count; i++)
 	{
 		visited[i] = 0;
-		printf("visited room Id in update: %d\n", i);
 	}
 	tmp = paths;
 	while (tmp)
@@ -31,7 +27,6 @@ void	update_visited(int *visited, t_path *paths, int room_count,
 		for (int i = 0; i < tmp->room_count; i++)
 		{
 			visited[tmp->room_ids[i]] = 1;
-			printf("visited room Id in update: %d\n", tmp->room_ids[i]);
 		}
 		tmp = tmp->next;
 	}
@@ -106,8 +101,6 @@ bool	exist_second_step(t_link *links, int startRoomId, int *visited)
 	{
 		if (currentLink->startId == startRoomId && !visited[currentLink->endId])
 		{
-			printf("found an unvisited room connected to the start room: %d\n",
-				currentLink->endId);
 			return (true);
 		}
 		currentLink = currentLink->next;
@@ -122,7 +115,6 @@ t_path	*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId,
 	int		room_count;
 	t_room	*tmp;
 	int		*visited;
-	int		*tmp2;
 	int		res;
 
 	paths = NULL;
@@ -130,7 +122,6 @@ t_path	*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId,
 	tmp = rooms;
 	while (tmp)
 	{
-		printf("room: %s, id: %d\n", tmp->name, tmp->id);
 		tmp = tmp->next;
 		room_count++;
 	}
@@ -142,18 +133,11 @@ t_path	*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId,
 				room_count);
 		if (res == false)
 		{
-			printf("No path found\n");
 			break ;
 		}
 		update_visited(visited, paths, room_count, endRoomId);
-		tmp2 = visited;
-		for (int i = 0; i < room_count; i++)
-		{
-			printf("visited: %d\n", tmp2[i]);
-		}
 		if (!exist_second_step(links, startRoomId, visited))
 		{
-			printf("No more paths to explore\n");
 			break ;
 		}
 	}

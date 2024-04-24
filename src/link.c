@@ -39,16 +39,8 @@ t_link	*add_link_both_order(t_link **links, char *start, char *end,
 
 void	add_link(t_link **links, char *start, char *end, t_room *rooms)
 {
-	t_link	*current;
-
 	add_link_both_order(links, start, end, rooms, false);
 	add_link_both_order(links, end, start, rooms, true);
-	current = *links;
-	while (current != NULL)
-	{
-		printf("check link: %d -> %d\n", current->startId, current->endId);
-		current = current->next;
-	}
 }
 
 void	free_links(t_link **links)

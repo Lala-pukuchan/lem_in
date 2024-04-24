@@ -2,15 +2,18 @@
 # define LEM_IN_H
 
 # define MAX_INPUT_SIZE 256
+# define MAX_ROOM_SIZE 10000
 
 # include "../libft/libft.h"
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+extern char			**roomNames;
 
 typedef struct s_room
 {
-	int id; // New field for room ID
+	int				id;
 	char			*name;
 	int x, y;
 	int				is_start;
@@ -36,8 +39,8 @@ typedef struct s_path
 typedef struct s_ant
 {
 	int				ant_id;
-	int path_index;       // Index of the path this ant is on
-	int current_position; // Index of the current room in the path
+	int				path_index;
+	int				current_position;
 }					t_ant;
 
 void				free_rooms(t_room **rooms);
@@ -60,5 +63,7 @@ void				distribute_ants(t_path **paths, int num_paths, int num_ants,
 						t_ant *ants);
 void				move_ants(t_path **paths, t_ant *ants, int num_ants,
 						int end_room_id);
+void				initializeRoomNames(int numRooms);
+void				freeRoomNames(void);
 
 #endif
