@@ -30,3 +30,16 @@ void	free_paths(t_path **paths)
 	}
 	*paths = NULL;
 }
+
+void reverse_paths(t_path **paths) {
+    t_path *prev = NULL;
+    t_path *current = *paths;
+    t_path *next = NULL;
+    while (current != NULL) {
+        next = current->next;  // Store next
+        current->next = prev;  // Reverse current node's pointer
+        prev = current;        // Move pointers one position ahead
+        current = next;
+    }
+    *paths = prev;  // Reset the head to the new front
+}

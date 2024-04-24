@@ -84,7 +84,6 @@ int	find_path(t_link *links, int startRoomId, int endRoomId, int visited[],
 		}
 		for (t_link *link = links; link; link = link->next)
 		{
-			printf("link: %d -> %d\n", link->startId, link->endId);
 			if (link->startId == uId && !visited[link->endId])
 			{
 				queue[rear++] = link->endId;
@@ -116,21 +115,20 @@ bool	exist_second_step(t_link *links, int startRoomId, int *visited)
 	return (false);
 }
 
-int	bfs_with_ant(t_room *rooms, t_link *links, int startRoomId, int endRoomId)
+t_path	*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId, int endRoomId)
 {
 	t_path	*paths;
 	int		room_count;
 	t_room	*tmp;
 	int		*visited;
 	int		*tmp2;
-	t_path	*tmp1;
 
 	paths = NULL;
 	room_count = 0;
 	tmp = rooms;
 	while (tmp)
 	{
-		printf("room: %s\n", tmp->name);
+		printf("room: %s, id: %d\n", tmp->name, tmp->id);
 		tmp = tmp->next;
 		room_count++;
 	}
@@ -155,21 +153,8 @@ int	bfs_with_ant(t_room *rooms, t_link *links, int startRoomId, int endRoomId)
 			break ;
 		}
 	}
-	tmp1 = paths;
-	int pathCount = 0;
-
-	while (tmp1)
-	{
-		printf("Path: ");
-		for (int i = 0; i < tmp1->room_count; i++)
-		{
-			printf("%d ->", tmp1->room_ids[i]);
-		}
-		printf("\n");
-		tmp1 = tmp1->next;
-		pathCount++;
-	}
-	free_paths(&paths);
+	
+	//free_paths(&paths);
 	free(visited);
-	return (0);
+	return (paths);
 }

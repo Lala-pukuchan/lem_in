@@ -33,6 +33,12 @@ typedef struct s_path
 	struct s_path	*next;
 }					t_path;
 
+typedef struct s_ant {
+    int ant_id;
+    int path_index; // Index of the path this ant is on
+	int current_position; // Index of the current room in the path
+} t_ant;
+
 void				free_rooms(t_room **rooms);
 void				free_links(t_link **links);
 t_room				*add_room(t_room **rooms, char *name, int x, int y,
@@ -41,11 +47,15 @@ void				add_link(t_link **links, char *start, char *end,
 						t_room *rooms);
 int					check(int number_of_ants, t_room *rooms, t_link *links,
 						int startFlag, int endFlag);
-int					bfs_with_ant(t_room *rooms, t_link *links, int startRoomId,
+t_path				*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId,
 						int endRoomId);
 int					get_room_index(t_room *rooms, char *name);
 t_path				*add_path(t_path **paths, int *queue, int queue_size);
 void				free_paths(t_path **paths);
 void				output_details(int number_of_ants, t_room *rooms_head,
 						t_link *links_head);
+void				reverse_paths(t_path **paths);
+void				distribute_ants(t_path **paths, int num_paths, int num_ants, t_ant *ants);
+void move_ants(t_path **paths, int num_paths, t_ant *ants, int num_ants);
+
 #endif
