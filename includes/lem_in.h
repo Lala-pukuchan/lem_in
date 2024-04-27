@@ -43,6 +43,51 @@ typedef struct s_ant
 	int				current_position;
 }					t_ant;
 
+typedef struct s_ant_move_params 
+{
+    t_ant			*ant;
+    t_path			*path;
+    int				*rooms;
+    bool			*arrived;
+    int				end_room_id;
+}					t_ant_move_params;
+
+typedef struct 		s_distribution
+{
+    t_path			**paths;
+    int				*ants_in_path;
+    int				num_paths;
+}					t_distribution;
+
+typedef struct s_ant_movement {
+    t_ant *ant;
+    int *rooms;
+    bool *arrived;
+    int end_room_id;
+} t_ant_movement;
+
+typedef struct		s_movement_context
+{
+	t_path			**paths;
+	t_ant			*ants;
+	int				*rooms;
+	bool			*arrived;
+	bool			*moved;
+	int				num_ants;
+	int				end_room_id;
+}					t_movement_context;
+
+typedef struct s_movement
+{
+	t_path			**paths;
+	t_ant			*ants;
+	int				*rooms;
+	bool			*arrived;
+	bool			*moved;
+	int				num_ants;
+	int				end_room_id;
+}					t_movement;
+
 void				free_rooms(t_room **rooms);
 void				free_links(t_link **links);
 t_room				*add_room(t_room **rooms, char *name, int x, int y,
@@ -65,5 +110,10 @@ void				move_ants(t_path **paths, t_ant *ants, int num_ants,
 						int end_room_id);
 void				initializeRoomNames(int numRooms);
 void				freeRoomNames(void);
-
+t_path *find_path_for_ant(t_path **paths, int path_index);
+void move_ant(t_ant_move_params *params, bool *moved);
+int find_best_path(t_distribution *dist);
+void initialize_movement(int num_ants, int **rooms, bool **arrived);
+void process_ants_movement(t_movement_context *context);
+int	*create_empty_rooms(int room_count);
 #endif
