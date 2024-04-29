@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-char	**roomNames = NULL;
+char	**g_room_names = NULL;
 
 int	main(void)
 {
@@ -44,7 +44,7 @@ int	main(void)
 	endFlag = 0;
 	startRoomId = -1;
 	endRoomId = -1;
-	initializeRoomNames(MAX_ROOM_SIZE);
+	initalize_room_names(MAX_ROOM_SIZE);
 	while (fgets(input, MAX_INPUT_SIZE, stdin) != NULL)
 	{
 		input[strcspn(input, "\n")] = 0;
@@ -81,9 +81,9 @@ int	main(void)
 			}
 			else
 			{
-				name = strtok(input, " ");
-				x = ft_atoi(strtok(NULL, " "));
-				y = ft_atoi(strtok(NULL, " "));
+				name = ft_strtok(input, " ");
+				x = ft_atoi(ft_strtok(NULL, " "));
+				y = ft_atoi(ft_strtok(NULL, " "));
 				if (startFlag == 1)
 				{
 					rooms = add_room(&rooms, name, x, y, 1, 0);
@@ -105,8 +105,8 @@ int	main(void)
 		}
 		if (state == 2)
 		{
-			start = strtok(input, "-");
-			end = strtok(NULL, "-");
+			start = ft_strtok(input, "-");
+			end = ft_strtok(NULL, "-");
 			add_link(&links, start, end, rooms);
 		}
 	}
@@ -115,7 +115,15 @@ int	main(void)
 		printf("Error reading input.\n");
 		return (1);
 	}
-	res = check(number_of_ants, rooms, links, startFlag, endFlag);
+	res = check_ants(number_of_ants, rooms, links);
+	if (res == 1)
+	{
+		free_rooms(&rooms);
+		free_links(&links);
+		printf("Invalid ant farm.\n");
+		return (1);
+	}
+	res = check_flags(rooms, links, startFlag, endFlag);
 	if (res == 1)
 	{
 		free_rooms(&rooms);
@@ -151,7 +159,7 @@ int	main(void)
 	free_rooms(&rooms);
 	free_links(&links);
 	free_paths(&paths);
-	freeRoomNames();
+	free_room_names();
 	// system("leaks lem-in");
 	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsujimariko <mtsuji@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 15:52:54 by tsujimari         #+#    #+#             */
+/*   Updated: 2024/04/29 15:52:58 by tsujimari        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lem_in.h"
 
 void	exist_start_end(t_room *rooms)
@@ -30,17 +42,26 @@ int	check_solution(t_room *rooms)
 	return (0);
 }
 
-int	check(int number_of_ants, t_room *rooms, t_link *links, int startFlag,
-		int endFlag)
+int	check_ants(int number_of_ants, t_room *rooms, t_link *links)
+{
+	if (number_of_ants <= 0 || number_of_ants > INT_MAX)
+	{
+		printf("Invalid number of ants.\n");
+		return (1);
+	}
+	if (rooms == NULL || links == NULL)
+	{
+		printf("Invalid room or link.\n");
+		return (1);
+	}
+	return (check_solution(rooms));
+}
+
+int	check_flags(t_room *rooms, t_link *links, int startFlag, int endFlag)
 {
 	if (startFlag == 0 || endFlag == 0)
 	{
 		printf("No start or end.\n");
-		return (1);
-	}
-	if (number_of_ants <= 0 || number_of_ants > INT_MAX)
-	{
-		printf("Invalid number of ants.\n");
 		return (1);
 	}
 	if (rooms == NULL || links == NULL)

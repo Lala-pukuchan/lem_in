@@ -76,7 +76,7 @@ static void	*ft_make_array(char **box, char *s, char c)
 }
 
 char	**ft_split(char const *s, char c)
-{	
+{
 	char	**box;
 	size_t	i;
 	size_t	j;

@@ -86,7 +86,7 @@ void	move_ants(t_path **paths, t_ant *ants, int num_ants, int end_room_id)
 	while (moved)
 	{
 		moved = false;
-		memset(rooms, 0, num_ants * sizeof(int));
+		ft_memset(rooms, 0, num_ants * sizeof(int));
 		process_ants_movement(&context);
 		if (moved)
 			printf("\n");

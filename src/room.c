@@ -1,18 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   room.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsujimariko <mtsuji@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 16:19:32 by tsujimari         #+#    #+#             */
+/*   Updated: 2024/04/29 16:19:33 by tsujimari        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lem_in.h"
 
 int		roomCount = 0;
 
-void	initializeRoomNames(int numRooms)
+void	initalize_room_names(int num_rooms)
 {
-	roomNames = malloc(numRooms * sizeof(char *));
-	if (roomNames == NULL)
+	int	i;
+
+	g_room_names = malloc(num_rooms * sizeof(char *));
+	if (g_room_names == NULL)
 	{
 		printf("Memory allocation failed for room names.\n");
 		exit(1);
 	}
-	for (int i = 0; i < numRooms; i++)
+	i = 0;
+	while (i < num_rooms)
 	{
-		roomNames[i] = NULL;
+		g_room_names[i] = NULL;
+		i++;
 	}
 }
 
@@ -30,7 +46,7 @@ t_room	*add_room(t_room **rooms, char *name, int x, int y, int is_start,
 	new_room->id = roomCount;
 	roomCount++;
 	new_room->name = strdup(name);
-	roomNames[new_room->id] = strdup(name);
+	g_room_names[new_room->id] = strdup(name);
 	new_room->x = x;
 	new_room->y = y;
 	new_room->is_start = is_start;
@@ -56,11 +72,15 @@ void	free_rooms(t_room **rooms)
 	*rooms = NULL;
 }
 
-void	freeRoomNames(void)
+void	free_room_names(void)
 {
-	for (int i = 0; i < MAX_ROOM_SIZE; i++)
+	int	i;
+
+	i = 0;
+	while (i < MAX_ROOM_SIZE)
 	{
-		free(roomNames[i]);
+		free(g_room_names[i]);
+		i++;
 	}
-	free(roomNames);
+	free(g_room_names);
 }

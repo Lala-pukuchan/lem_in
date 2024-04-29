@@ -7,7 +7,7 @@ int	*create_empty_visited(int room_count, int startRoomId)
 	visited = malloc(room_count * sizeof(int));
 	if (!visited)
 		return (NULL);
-	memset(visited, 0, room_count * sizeof(int));
+	ft_memset(visited, 0, room_count * sizeof(int));
 	visited[startRoomId] = 1;
 	return (visited);
 }
@@ -16,10 +16,13 @@ void	update_visited(int *visited, t_path *paths, int room_count,
 		int endRoomId)
 {
 	t_path	*tmp;
+	int		i;
 
-	for (int i = 0; i < room_count; i++)
+	i = 0;
+	while (i < room_count)
 	{
 		visited[i] = 0;
+		i++;
 	}
 	tmp = paths;
 	while (tmp)

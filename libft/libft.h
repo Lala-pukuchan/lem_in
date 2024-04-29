@@ -71,5 +71,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin_free_s1(char *s1, char const *s2);
 bool	ft_atol_and_check_over_flow(char *str, long long int *num);
+char	*ft_strtok(char *str, const char *delim);
 
 #endif // _LIBFT_H_

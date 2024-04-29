@@ -58,7 +58,6 @@ void	output_details(int number_of_ants, t_room *rooms_head,
 	print_start_room(rooms_head);
 	print_end_room(rooms_head);
 	current_room = rooms_head;
-	// Now, print the rest of the rooms, skipping the start and end rooms
 	while (current_room != NULL)
 	{
 		if (!current_room->is_start && !current_room->is_end)

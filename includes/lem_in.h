@@ -9,7 +9,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-extern char			**roomNames;
+extern char			**g_room_names;
 
 typedef struct s_room
 {
@@ -94,8 +94,8 @@ t_room				*add_room(t_room **rooms, char *name, int x, int y,
 						int is_start, int is_end);
 void				add_link(t_link **links, char *start, char *end,
 						t_room *rooms);
-int					check(int number_of_ants, t_room *rooms, t_link *links,
-						int startFlag, int endFlag);
+int					check_ants(int number_of_ants, t_room *rooms, t_link *links);
+int					check_flags(t_room *rooms, t_link *links, int startFlag, int endFlag);
 t_path				*bfs_with_ant(t_room *rooms, t_link *links, int startRoomId,
 						int endRoomId);
 int					get_room_index(t_room *rooms, char *name);
@@ -108,8 +108,8 @@ void				distribute_ants(t_path **paths, int num_paths, int num_ants,
 						t_ant *ants);
 void				move_ants(t_path **paths, t_ant *ants, int num_ants,
 						int end_room_id);
-void				initializeRoomNames(int numRooms);
-void				freeRoomNames(void);
+void				initalize_room_names(int num_rooms);
+void				free_room_names(void);
 t_path *find_path_for_ant(t_path **paths, int path_index);
 void move_ant(t_ant_move_params *params, bool *moved);
 int find_best_path(t_distribution *dist);

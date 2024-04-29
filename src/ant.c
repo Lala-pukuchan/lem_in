@@ -74,7 +74,7 @@ int	*create_empty_rooms(int room_count)
 	rooms = malloc(room_count * sizeof(int));
 	if (!rooms)
 		return (NULL);
-	memset(rooms, 0, room_count * sizeof(int));
+	ft_memset(rooms, 0, room_count * sizeof(int));
 	return (rooms);
 }
 
@@ -92,7 +92,7 @@ void	move_ant(t_ant_move_params *params, bool *moved)
 		if (params->rooms[next_room_id] == 0 || \
 			next_room_id == params->end_room_id)
 		{
-			printf("L%d-%s ", params->ant->ant_id, roomNames[next_room_id]);
+			printf("L%d-%s ", params->ant->ant_id, g_room_names[next_room_id]);
 			params->rooms[current_room_id] = 0;
 			params->ant->current_position = next_room_index;
 			params->rooms[next_room_id] = 1;

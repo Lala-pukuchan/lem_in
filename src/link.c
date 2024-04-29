@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   link.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsujimariko <mtsuji@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 16:02:55 by tsujimari         #+#    #+#             */
+/*   Updated: 2024/04/29 16:02:56 by tsujimari        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lem_in.h"
 
-int	getRoomId(t_room *rooms, char *name)
+int	get_room_id(t_room *rooms, char *name)
 {
 	int		id;
 	t_room	*current;
@@ -29,8 +41,8 @@ t_link	*add_link_both_order(t_link **links, char *start, char *end,
 		printf("Memory allocation failed.\n");
 		exit(1);
 	}
-	new_link->startId = getRoomId(rooms, start);
-	new_link->endId = getRoomId(rooms, end);
+	new_link->startId = get_room_id(rooms, start);
+	new_link->endId = get_room_id(rooms, end);
 	new_link->opposite = opposite;
 	new_link->next = *links;
 	*links = new_link;

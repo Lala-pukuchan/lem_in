@@ -30,7 +30,7 @@ int	ft_count_digit(long long int n)
 char	*ft_make_box(char *box, long long int n, int digit)
 {
 	while (n)
-	{	
+	{
 		box[digit--] = '0' + (n % 10);
 		n = n / 10;
 	}
