@@ -12,6 +12,8 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define  BUFFER_SIZE 1024
+# define FD_MAX 1024
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -19,6 +21,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <limits.h>
+# include <stddef.h>
 
 typedef struct s_list
 {
@@ -48,6 +51,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
+char	*ft_strndup(const char *s, int size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
@@ -73,4 +77,11 @@ char	*ft_strjoin_free_s1(char *s1, char const *s2);
 bool	ft_atol_and_check_over_flow(char *str, long long int *num);
 char	*ft_strtok(char *str, const char *delim);
 
+//Get_next_line
+size_t	ft_strchr_idx(const char *s, int c);
+char	*ft_append_buf_to_save(char	*buf, char	*save, int	size);
+char	*ft_read_file(int	fd, char	*save);
+char	*ft_create_line(char	*save);
+char	*ft_save_remain(char	*save);
+char	*get_next_line(int fd);
 #endif // _LIBFT_H_

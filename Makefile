@@ -1,5 +1,5 @@
 NAME         = lem-in
-SRC          = $(addprefix src/, main.c check.c room.c link.c path.c print.c edmondskarp.c ant.c movement_ant.c)
+SRC          = $(addprefix src/, main.c check.c room.c link.c path.c print.c 1_edmondskarp.c ant.c 2_edmondskarp.c 3_edmondskarp.c movement_ant.c)
 INCLUDE_DIR  = ./includes
 INCLUDE      = -I $(INCLUDE_DIR) -I ./libft
 OBJS         = $(SRC:%.c=%.o)

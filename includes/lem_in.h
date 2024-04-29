@@ -88,6 +88,44 @@ typedef struct s_movement
 	int				end_room_id;
 }					t_movement;
 
+typedef struct s_find_path_params {
+    t_link *links;
+    int startRoomId;
+    int endRoomId;
+    t_path **paths;
+    int room_count;
+    int *visited;
+    int *queue;
+    int *predecessors;
+    int front;
+    int rear;
+} t_find_path_params;
+
+typedef struct s_link_info {
+    char *start;
+    char *end;
+    t_room *rooms;
+} t_link_info;
+typedef struct {
+    int number_of_ants;
+    t_room *rooms;
+    t_link *links;
+    int startFlag;
+    int endFlag;
+    int startRoomId;
+    int endRoomId;
+} t_main_data;
+
+typedef struct {
+    int state;
+    int startFlag;
+    int endFlag;
+    int startRoomId;
+    int endRoomId;
+    int number_of_ants;
+} SimulationConfig;
+
+
 void				free_rooms(t_room **rooms);
 void				free_links(t_link **links);
 t_room				*add_room(t_room **rooms, char *name, int x, int y,
@@ -108,12 +146,32 @@ void				distribute_ants(t_path **paths, int num_paths, int num_ants,
 						t_ant *ants);
 void				move_ants(t_path **paths, t_ant *ants, int num_ants,
 						int end_room_id);
-void				initalize_room_names(int num_rooms);
+void				initialize_room_names(int num_rooms);
 void				free_room_names(void);
-t_path *find_path_for_ant(t_path **paths, int path_index);
-void move_ant(t_ant_move_params *params, bool *moved);
-int find_best_path(t_distribution *dist);
-void initialize_movement(int num_ants, int **rooms, bool **arrived);
-void process_ants_movement(t_movement_context *context);
-int	*create_empty_rooms(int room_count);
+t_path				*find_path_for_ant(t_path **paths, int path_index);
+void				move_ant(t_ant_move_params *params, bool *moved);
+int					find_best_path(t_distribution *dist);
+void				initialize_movement(int num_ants, int **rooms, bool **arrived);
+void				process_ants_movement(t_movement_context *context);
+int					*create_empty_rooms(int room_count);
+
+//1_edmondskarp.c
+int					*create_empty_visited(int room_count, int startRoomId);
+void				update_visited(int *visited, t_path *paths, \
+						int room_count, int endRoomId);
+int					initialize_find_path_params(t_find_path_params *params);
+int					calculate_path_length(int *predecessors, int endRoomId);
+int					*construct_path(int *predecessors, int path_length, int endRoomId);
+//2_edmondskarp.c
+void				add_path_to_paths(t_path **paths, int *path, int path_length);
+void				update_queue_and_predecessors(t_find_path_params *params, int uId);
+int					process_node(t_find_path_params *params, int uid);
+int					find_path(t_find_path_params *params);
+bool				exist_second_step(t_link *links, int startRoomId, int *visited);
+//3_edmondskarp.c
+void				initialize_params(t_find_path_params *params, t_room *rooms);
+t_path				*execute_search(t_find_path_params *params, \
+						t_link *links, int startRoomId);
+t_path				*bfs_with_ant(t_room *rooms, t_link *links, \
+						int startRoomId, int endRoomId);
 #endif

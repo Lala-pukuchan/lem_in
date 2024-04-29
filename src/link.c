@@ -30,8 +30,8 @@ int	get_room_id(t_room *rooms, char *name)
 	return (id);
 }
 
-t_link	*add_link_both_order(t_link **links, char *start, char *end,
-		t_room *rooms, bool opposite)
+t_link	*add_link_both_order(t_link **links, t_link_info *info, \
+	bool opposite)
 {
 	t_link	*new_link;
 
@@ -41,8 +41,8 @@ t_link	*add_link_both_order(t_link **links, char *start, char *end,
 		printf("Memory allocation failed.\n");
 		exit(1);
 	}
-	new_link->startId = get_room_id(rooms, start);
-	new_link->endId = get_room_id(rooms, end);
+	new_link->startId = get_room_id(info->rooms, info->start);
+	new_link->endId = get_room_id(info->rooms, info->end);
 	new_link->opposite = opposite;
 	new_link->next = *links;
 	*links = new_link;
@@ -51,8 +51,17 @@ t_link	*add_link_both_order(t_link **links, char *start, char *end,
 
 void	add_link(t_link **links, char *start, char *end, t_room *rooms)
 {
-	add_link_both_order(links, start, end, rooms, false);
-	add_link_both_order(links, end, start, rooms, true);
+	t_link_info	start_to_end_info;
+	t_link_info	end_to_start_info;
+
+	start_to_end_info.start = start;
+	start_to_end_info.end = end;
+	start_to_end_info.rooms = rooms;
+	end_to_start_info.start = end;
+	end_to_start_info.end = start;
+	end_to_start_info.rooms = rooms;
+	add_link_both_order(links, &start_to_end_info, false);
+	add_link_both_order(links, &end_to_start_info, true);
 }
 
 void	free_links(t_link **links)

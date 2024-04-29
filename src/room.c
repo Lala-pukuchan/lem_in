@@ -12,9 +12,9 @@
 
 #include "../includes/lem_in.h"
 
-int		roomCount = 0;
+int		room_count = 0;
 
-void	initalize_room_names(int num_rooms)
+void	initialize_room_names(int num_rooms)
 {
 	int	i;
 
@@ -43,8 +43,8 @@ t_room	*add_room(t_room **rooms, char *name, int x, int y, int is_start,
 		printf("Memory allocation failed.\n");
 		exit(1);
 	}
-	new_room->id = roomCount;
-	roomCount++;
+	new_room->id = room_count;
+	room_count++;
 	new_room->name = strdup(name);
 	g_room_names[new_room->id] = strdup(name);
 	new_room->x = x;
