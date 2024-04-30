@@ -12,7 +12,7 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define  BUFFER_SIZE 1024
+# define BUFFER_SIZE 1024
 # define FD_MAX 1024
 
 # include <stdio.h>
@@ -79,9 +79,9 @@ char	*ft_strtok(char *str, const char *delim);
 
 //Get_next_line
 size_t	ft_strchr_idx(const char *s, int c);
-char	*ft_append_buf_to_save(char	*buf, char	*save, int	size);
-char	*ft_read_file(int	fd, char	*save);
-char	*ft_create_line(char	*save);
-char	*ft_save_remain(char	*save);
+char	*ft_append_buf_to_save(char *buf, char *save, int size);
+char	*ft_read_file(int fd, char *save);
+char	*ft_create_line(char *save);
+char	*ft_save_remain(char *save);
 char	*get_next_line(int fd);
 #endif // _LIBFT_H_

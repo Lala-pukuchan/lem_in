@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-int	*create_empty_visited(int room_count, int startRoomId)
+int	*create_empty_visited(int room_count, int start_room_id)
 {
 	int	*visited;
 
@@ -20,12 +20,12 @@ int	*create_empty_visited(int room_count, int startRoomId)
 	if (!visited)
 		return (NULL);
 	ft_memset(visited, 0, room_count * sizeof(int));
-	visited[startRoomId] = 1;
+	visited[start_room_id] = 1;
 	return (visited);
 }
 
 void	update_visited(int *visited, t_path *paths, \
-	int room_count, int endRoomId)
+	int room_count, int end_room_id)
 {
 	t_path	*tmp;
 	int		index;
@@ -44,7 +44,7 @@ void	update_visited(int *visited, t_path *paths, \
 		}
 		tmp = tmp->next;
 	}
-	visited[endRoomId] = 0;
+	visited[end_room_id] = 0;
 }
 
 int	initialize_find_path_params(t_find_path_params *params)
@@ -63,13 +63,13 @@ int	initialize_find_path_params(t_find_path_params *params)
 	return (1);
 }
 
-int	calculate_path_length(int *predecessors, int endRoomId)
+int	calculate_path_length(int *predecessors, int end_room_id)
 {
 	int	length;
 	int	at;
 
 	length = 0;
-	at = endRoomId;
+	at = end_room_id;
 	while (at != -1)
 	{
 		length++;
@@ -78,7 +78,7 @@ int	calculate_path_length(int *predecessors, int endRoomId)
 	return (length);
 }
 
-int	*construct_path(int *predecessors, int path_length, int endRoomId)
+int	*construct_path(int *predecessors, int path_length, int end_room_id)
 {
 	int	*path;
 	int	i;
@@ -86,7 +86,7 @@ int	*construct_path(int *predecessors, int path_length, int endRoomId)
 
 	path = malloc(path_length * sizeof(int));
 	i = path_length - 1;
-	at = endRoomId;
+	at = end_room_id;
 	if (path)
 	{
 		while (i >= 0)

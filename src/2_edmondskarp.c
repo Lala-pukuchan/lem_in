@@ -38,11 +38,11 @@ void	update_queue_and_predecessors(t_find_path_params *params, int uId)
 	link = params->links;
 	while (link != NULL)
 	{
-		if (link->startId == uId && !params->visited[link->endId])
+		if (link->start_id == uId && !params->visited[link->end_id])
 		{
-			params->queue[params->rear++] = link->endId;
-			params->visited[link->endId] = 1;
-			params->predecessors[link->endId] = uId;
+			params->queue[params->rear++] = link->end_id;
+			params->visited[link->end_id] = 1;
+			params->predecessors[link->end_id] = uId;
 		}
 		link = link->next;
 	}
@@ -54,12 +54,12 @@ int	process_node(t_find_path_params *params, int uid)
 	int	*path;
 
 	path = NULL;
-	if (uid == params->endRoomId)
+	if (uid == params->end_room_id)
 	{
 		path_length = calculate_path_length(params->predecessors, \
-			params->endRoomId);
+			params->end_room_id);
 		path = construct_path(params->predecessors, path_length, \
-			params->endRoomId);
+			params->end_room_id);
 		add_path_to_paths(params->paths, path, path_length);
 		free(path);
 		return (1);
@@ -76,7 +76,7 @@ int	find_path(t_find_path_params *params)
 	found = 0;
 	if (!initialize_find_path_params(params))
 		return (0);
-	params->queue[params->rear++] = params->startRoomId;
+	params->queue[params->rear++] = params->start_room_id;
 	while (params->front != params->rear && !found)
 	{
 		uid = params->queue[params->front++];
@@ -87,15 +87,15 @@ int	find_path(t_find_path_params *params)
 	return (found);
 }
 
-bool	exist_second_step(t_link *links, int startRoomId, int *visited)
+bool	exist_second_step(t_link *links, int start_room_id, int *visited)
 {
 	t_link	*current_link;
 
 	current_link = links;
 	while (current_link != NULL)
 	{
-		if (current_link->startId == startRoomId && \
-			!visited[current_link->endId])
+		if (current_link->start_id == start_room_id && \
+			!visited[current_link->end_id])
 			return (true);
 		current_link = current_link->next;
 	}

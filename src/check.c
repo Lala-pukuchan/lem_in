@@ -57,9 +57,9 @@ int	check_ants(int number_of_ants, t_room *rooms, t_link *links)
 	return (check_solution(rooms));
 }
 
-int	check_flags(t_room *rooms, t_link *links, int startFlag, int endFlag)
+int	check_flags(t_room *rooms, t_link *links, int start_flag, int end_flag)
 {
-	if (startFlag == 0 || endFlag == 0)
+	if (start_flag == 0 || end_flag == 0)
 	{
 		printf("No start or end.\n");
 		return (1);

@@ -72,7 +72,7 @@ void	output_details(int number_of_ants, t_room *rooms_head,
 	{
 		if (!current_link->opposite)
 		{
-			printf("%d-%d\n", current_link->startId, current_link->endId);
+			printf("%d-%d\n", current_link->start_id, current_link->end_id);
 		}
 		current_link = current_link->next;
 	}

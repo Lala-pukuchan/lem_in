@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_append_buf_to_save(char	*buf, char	*save, int	size)
+char	*ft_append_buf_to_save(char *buf, char *save, int size)
 {
 	char	*tmp;
 
@@ -20,7 +20,7 @@ char	*ft_append_buf_to_save(char	*buf, char	*save, int	size)
 	if (!save)
 	{
 		save = ft_strndup(buf, ft_strlen(buf));
-	}	
+	}
 	else
 	{
 		tmp = ft_strjoin(save, buf);
@@ -30,7 +30,7 @@ char	*ft_append_buf_to_save(char	*buf, char	*save, int	size)
 	return (save);
 }
 
-char	*ft_read_file(int	fd, char	*save)
+char	*ft_read_file(int fd, char *save)
 {
 	int		size;
 	char	buf[BUFFER_SIZE + 1];

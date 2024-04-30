@@ -41,8 +41,8 @@ t_link	*add_link_both_order(t_link **links, t_link_info *info, \
 		printf("Memory allocation failed.\n");
 		exit(1);
 	}
-	new_link->startId = get_room_id(info->rooms, info->start);
-	new_link->endId = get_room_id(info->rooms, info->end);
+	new_link->start_id = get_room_id(info->rooms, info->start);
+	new_link->end_id = get_room_id(info->rooms, info->end);
 	new_link->opposite = opposite;
 	new_link->next = *links;
 	*links = new_link;

@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-int		room_count = 0;
+int		g_room_count = 0;
 
 void	initialize_room_names(int num_rooms)
 {
@@ -32,23 +32,21 @@ void	initialize_room_names(int num_rooms)
 	}
 }
 
-t_room	*add_room(t_room **rooms, char *name, int x, int y, int is_start,
-		int is_end)
+t_room	*add_room(t_room **rooms, t_r_info *room_info, int is_start, int is_end)
 {
 	t_room	*new_room;
 
 	new_room = malloc(sizeof(t_room));
 	if (new_room == NULL)
 	{
-		printf("Memory allocation failed.\n");
+		ft_putstr_fd("Memory allocation failed.\n", STDERR_FILENO);
 		exit(1);
 	}
-	new_room->id = room_count;
-	room_count++;
-	new_room->name = strdup(name);
-	g_room_names[new_room->id] = strdup(name);
-	new_room->x = x;
-	new_room->y = y;
+	new_room->id = g_room_count++;
+	new_room->name = ft_strdup(room_info->name);
+	g_room_names[new_room->id] = ft_strdup(room_info->name);
+	new_room->x = room_info->x;
+	new_room->y = room_info->y;
 	new_room->is_start = is_start;
 	new_room->is_end = is_end;
 	new_room->next = *rooms;
