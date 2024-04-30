@@ -174,7 +174,6 @@ t_path				*execute_search(t_find_path_params *params, \
 						t_link *links, int start_room_id);
 t_path				*bfs_with_ant(t_room *rooms, t_link *links, \
 						int start_room_id, int end_room_id);
-
 //1_outil_for_main
 void				process_comment_line(char *input, \
 						t_simulation_config *config);
@@ -203,7 +202,6 @@ t_path				*setup_simulation(t_simulation_config *config, \
 						t_room *rooms, t_link *links, int *path_count);
 int					run_simulation(t_path *paths, int path_count, \
 						t_simulation_config *config);
-
 //ant.c
 int					find_best_path(t_distribution *dist);
 void				distribute_ants(t_path **paths, int num_paths, \
