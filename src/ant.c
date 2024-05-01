@@ -89,6 +89,11 @@ void	move_ant(t_ant_move_params *params, bool *moved)
 	if (next_room_index < params->path->room_count)
 	{
 		next_room_id = params->path->room_ids[next_room_index];
+		//printf("next_room_id:					%d\n", next_room_id);
+		//printf("params->end_room_id:			%d\n", params->end_room_id);
+		//printf("params->path->room_count:		%d\n", params->path->room_count);
+		//printf("params->rooms[next_room_id]:	%d\n", params->rooms[next_room_id]);
+
 		if (params->rooms[next_room_id] == 0 || \
 			next_room_id == params->end_room_id)
 		{

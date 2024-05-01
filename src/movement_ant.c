@@ -14,7 +14,7 @@
 
 void	initialize_movement(int num_ants, int **rooms, bool **arrived)
 {
-	*rooms = create_empty_rooms(num_ants);
+	*rooms = create_empty_rooms(g_room_count);
 	*arrived = ft_calloc(num_ants, sizeof(bool));
 	if (*rooms == NULL || *arrived == NULL)
 	{
@@ -34,9 +34,22 @@ void	move_single_ant(t_path **paths,
 	{
 		params.ant = move_params->ant;
 		params.path = path;
-		params.rooms = move_params->rooms;
+		params.rooms = move_params->rooms;//
 		params.arrived = move_params->arrived;
 		params.end_room_id = move_params->end_room_id;
+		//printf("Debugging `params`:\n");
+        //printf("params.ant->ant_id:				%d\n", params.ant->ant_id);
+        //printf("params.ant->current_position:	%d\n", params.ant->current_position);
+        //printf("params.ant->path_index:			%d\n", params.ant->path_index);
+        //printf("params.path->room_count:		%d\n", params.path->room_count);
+        //printf("params.end_room_id:				%d\n", params.end_room_id);
+
+        // If `rooms` is an array, you might want to print specific rooms or all rooms
+        // For example, print the first room if `params.path->room_count > 0`
+        //if (params.path->room_count > 0) {
+        //    printf("First Room in Path: %d\n", params.rooms[params.path->room_ids[0]]);
+        //}
+
 		move_ant(&params, moved);
 	}
 }
@@ -46,7 +59,7 @@ void	process_ants_movement(t_movement_context *context)
 	int				i;
 	t_ant_movement	move_params;
 
-	move_params.rooms = context->rooms;
+	move_params.rooms = context->rooms;//
 	move_params.arrived = context->arrived;
 	move_params.end_room_id = context->end_room_id;
 	i = 0;
@@ -75,6 +88,7 @@ void	move_ants(t_path **paths, t_ant *ants, int num_ants, int end_room_id)
 	t_movement_context	context;
 
 	moved = true;
+	//rooms = malloc(g_room_count * sizeof(int));
 	initialize_movement(num_ants, &rooms, &arrived);
 	context.paths = paths;
 	context.ants = ants;

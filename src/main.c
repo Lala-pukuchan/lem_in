@@ -29,10 +29,11 @@ int	main(void)
 	read_and_parse_input(&config, &rooms, &links);
 	if (validate_ants_number(config.number_of_ants, rooms, links) != 0 || \
 		validate_flags(rooms, links, config.start_flag, config.end_flag) != 0)
-		return (free_resources(NULL, rooms, links, NULL), 1);
+		return (free_resources(rooms, links, NULL), 1);
 	paths = setup_simulation(&config, rooms, links, &path_count);
 	if (!run_simulation(paths, path_count, &config))
-		return (finalize_simulation(rooms, links), 1);
-	finalize_simulation(rooms, links);
+		return (finalize_simulation(rooms, links, paths), 1);
+	finalize_simulation(rooms, links, paths);
+	printf("g_room_count: %d\n", g_room_count);
 	return (0);
 }

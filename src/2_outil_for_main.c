@@ -12,11 +12,11 @@
 
 #include "../includes/lem_in.h"
 
-void	free_resources(t_ant *ants, t_room *rooms, t_link *links, \
+void	free_resources(t_room *rooms, t_link *links, \
 	t_path *paths)
 {
-	if (ants != NULL)
-		free(ants);
+	//if (ants != NULL)
+	//	free(ants);
 	if (rooms != NULL)
 		free_rooms(&rooms);
 	if (links != NULL)
