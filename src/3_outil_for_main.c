@@ -58,7 +58,7 @@ t_path	*setup_simulation(t_simulation_config *config, t_room *rooms, \
 int	run_simulation(t_path *paths, int path_count, t_simulation_config *config)
 {
 	t_ant	*ants;
-	
+
 	ants = malloc(config->number_of_ants * sizeof(t_ant));
 	if (ants == NULL)
 	{
@@ -66,9 +66,6 @@ int	run_simulation(t_path *paths, int path_count, t_simulation_config *config)
 		return (1);
 	}
 	initialize_ants(ants, config->number_of_ants);
-	//printf("path_count: %d\n", path_count);
-	//printf("config->number_of_ants: %d\n", config->number_of_ants);
-	//printf("config->end_room_id: %d\n", config->end_room_id);
 	distribute_ants(&paths, path_count, config->number_of_ants, ants);
 	move_ants(&paths, ants, config->number_of_ants, config->end_room_id);
 	free(ants);

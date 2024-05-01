@@ -197,7 +197,8 @@ int					count_paths(t_path *paths);
 void				initialize_simulation_config(t_simulation_config *config);
 void				read_and_parse_input(t_simulation_config *config, \
 						t_room **rooms, t_link **links);
-void				finalize_simulation(t_room *rooms, t_link *links, t_path *paths);
+void				finalize_simulation(t_room *rooms, t_link *links, \
+						t_path *paths);
 t_path				*setup_simulation(t_simulation_config *config, \
 						t_room *rooms, t_link *links, int *path_count);
 int					run_simulation(t_path *paths, int path_count, \

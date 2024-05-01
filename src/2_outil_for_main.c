@@ -15,8 +15,6 @@
 void	free_resources(t_room *rooms, t_link *links, \
 	t_path *paths)
 {
-	//if (ants != NULL)
-	//	free(ants);
 	if (rooms != NULL)
 		free_rooms(&rooms);
 	if (links != NULL)
