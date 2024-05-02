@@ -34,6 +34,5 @@ int	main(void)
 	if (!run_simulation(paths, path_count, &config))
 		return (finalize_simulation(rooms, links, paths), 1);
 	finalize_simulation(rooms, links, paths);
-	printf("g_room_count: %d\n", g_room_count);
 	return (0);
 }

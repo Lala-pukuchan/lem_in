@@ -22,12 +22,23 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <stddef.h>
+# include <stdarg.h>
+# include <ctype.h>
+# include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_count
+{
+	int		byte;
+	int		index;
+	va_list	argument;
+}	t_count;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -75,6 +86,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin_free_s1(char *s1, char const *s2);
 bool	ft_atol_and_check_over_flow(char *str, long long int *num);
+
+//strtok
 char	*ft_strtok(char *str, const char *delim);
 
 //Get_next_line
@@ -84,4 +97,15 @@ char	*ft_read_file(int fd, char *save);
 char	*ft_create_line(char *save);
 char	*ft_save_remain(char *save);
 char	*get_next_line(int fd);
+
+//ft_printf
+int		ft_printf(const char *format, ...);
+int		print_char(const char **format, va_list list);
+int		ft_putchar(char c);
+int		ft_putstr(char *str);
+int		ft_putnbr(long nb);
+void	conversion_checker(char *format, t_count *count);
+void	print_before_sign(char *format, t_count *count);
+int		to_hexadecimal(unsigned long long nb, char conversion);
+int		print_pointer(void *nb, char format);
 #endif // _LIBFT_H_

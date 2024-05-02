@@ -18,7 +18,7 @@ void	initialize_movement(int num_ants, int **rooms, bool **arrived)
 	*arrived = ft_calloc(num_ants, sizeof(bool));
 	if (*rooms == NULL || *arrived == NULL)
 	{
-		printf("Failed to allocate memory");
+		ft_printf("Failed to allocate memory");
 		exit(1);
 	}
 }
@@ -89,7 +89,7 @@ void	move_ants(t_path **paths, t_ant *ants, int num_ants, int end_room_id)
 		ft_memset(rooms, 0, num_ants * sizeof(int));
 		process_ants_movement(&context);
 		if (moved)
-			printf("\n");
+			ft_printf("\n");
 	}
 	cleanup_movement_resources(rooms, arrived);
 }

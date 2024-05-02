@@ -21,8 +21,8 @@ void	print_start_room(t_room *rooms_head)
 	{
 		if (current_room->is_start)
 		{
-			printf("##start\n");
-			printf("%s %d %d\n", current_room->name, current_room->x,
+			ft_printf("##start\n");
+			ft_printf("%s %d %d\n", current_room->name, current_room->x,
 				current_room->y);
 			return ;
 		}
@@ -39,8 +39,8 @@ void	print_end_room(t_room *rooms_head)
 	{
 		if (current_room->is_end)
 		{
-			printf("##end\n");
-			printf("%s %d %d\n", current_room->name, current_room->x,
+			ft_printf("##end\n");
+			ft_printf("%s %d %d\n", current_room->name, current_room->x,
 				current_room->y);
 			return ;
 		}
@@ -54,7 +54,7 @@ void	output_details(int number_of_ants, t_room *rooms_head,
 	t_room	*current_room;
 	t_link	*current_link;
 
-	printf("%d\n", number_of_ants);
+	ft_printf("%d\n", number_of_ants);
 	print_start_room(rooms_head);
 	print_end_room(rooms_head);
 	current_room = rooms_head;
@@ -62,7 +62,7 @@ void	output_details(int number_of_ants, t_room *rooms_head,
 	{
 		if (!current_room->is_start && !current_room->is_end)
 		{
-			printf("%s %d %d\n", current_room->name, current_room->x,
+			ft_printf("%s %d %d\n", current_room->name, current_room->x,
 				current_room->y);
 		}
 		current_room = current_room->next;
@@ -72,7 +72,7 @@ void	output_details(int number_of_ants, t_room *rooms_head,
 	{
 		if (!current_link->opposite)
 		{
-			printf("%d-%d\n", current_link->start_id, current_link->end_id);
+			ft_printf("%d-%d\n", current_link->start_id, current_link->end_id);
 		}
 		current_link = current_link->next;
 	}

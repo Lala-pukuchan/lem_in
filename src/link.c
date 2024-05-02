@@ -38,7 +38,7 @@ t_link	*add_link_both_order(t_link **links, t_link_info *info, \
 	new_link = malloc(sizeof(t_link));
 	if (new_link == NULL)
 	{
-		printf("Memory allocation failed.\n");
+		ft_printf("Memory allocation failed.\n");
 		exit(1);
 	}
 	new_link->start_id = get_room_id(info->rooms, info->start);

@@ -27,8 +27,7 @@ int	validate_ants_number(int number_of_ants, t_room *rooms, \
 	t_link *links)
 {
 	if (check_ants(number_of_ants, rooms, links) != 0)
-		return (ft_putstr_fd("Invalid number of ants.\n", \
-			STDERR_FILENO), 1);
+		return (1);
 	return (0);
 }
 

@@ -21,7 +21,7 @@ void	initialize_room_names(int num_rooms)
 	g_room_names = malloc(num_rooms * sizeof(char *));
 	if (g_room_names == NULL)
 	{
-		printf("Memory allocation failed for room names.\n");
+		ft_printf("Memory allocation failed for room names.\n");
 		exit(1);
 	}
 	i = 0;

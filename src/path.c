@@ -19,7 +19,7 @@ t_path	*add_path(t_path **paths, int *queue, int queue_size)
 	new_path = malloc(sizeof(t_path));
 	if (new_path == NULL)
 	{
-		printf("Memory allocation failed.\n");
+		ft_printf("Memory allocation failed.\n");
 		exit(1);
 	}
 	new_path->room_ids = malloc(queue_size * sizeof(int));
