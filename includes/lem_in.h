@@ -42,6 +42,8 @@ typedef struct s_link
 	int				end_id;
 	struct s_link	*next;
 	bool			opposite;
+	char			*start_name;
+	char			*end_name;
 }					t_link;
 
 typedef struct s_path
@@ -218,6 +220,7 @@ int					check_ants(int number_of_ants, t_room *rooms, \
 int					check_flags(t_room *rooms, t_link *links, \
 						int start_flag, int end_flag);
 //link.c
+char				*get_room_name_by_id(t_room *rooms, int room_id);
 int					get_room_id(t_room *rooms, char *name);
 t_link				*add_link_both_order(t_link **links, \
 						t_link_info *info, bool opposite);

@@ -30,6 +30,22 @@ int	get_room_id(t_room *rooms, char *name)
 	return (id);
 }
 
+char	*get_room_name_by_id(t_room *rooms, int room_id)
+{
+	t_room	*current;
+
+	current = rooms;
+	while (current != NULL)
+	{
+		if (current->id == room_id)
+		{
+			return (current->name);
+		}
+		current = current->next;
+	}
+	return (NULL);
+}
+
 t_link	*add_link_both_order(t_link **links, t_link_info *info, \
 	bool opposite)
 {
@@ -43,6 +59,10 @@ t_link	*add_link_both_order(t_link **links, t_link_info *info, \
 	}
 	new_link->start_id = get_room_id(info->rooms, info->start);
 	new_link->end_id = get_room_id(info->rooms, info->end);
+	new_link->start_name = ft_strdup(get_room_name_by_id(info->rooms, \
+		new_link->start_id));
+	new_link->end_name = ft_strdup(get_room_name_by_id(info->rooms, \
+		new_link->end_id));
 	new_link->opposite = opposite;
 	new_link->next = *links;
 	*links = new_link;
@@ -73,6 +93,8 @@ void	free_links(t_link **links)
 	while (current != NULL)
 	{
 		next = current->next;
+		free(current->start_name);
+		free(current->end_name);
 		free(current);
 		current = next;
 	}

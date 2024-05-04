@@ -71,9 +71,9 @@ void	output_details(int number_of_ants, t_room *rooms_head,
 	while (current_link != NULL)
 	{
 		if (!current_link->opposite)
-		{
-			ft_printf("%d-%d\n", current_link->start_id, current_link->end_id);
-		}
+			ft_printf("%s-%s\n", current_link->start_name, \
+			current_link->end_name);
 		current_link = current_link->next;
 	}
+	ft_printf("\n");
 }
