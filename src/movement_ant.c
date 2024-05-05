@@ -17,10 +17,7 @@ void	initialize_movement(int num_ants, int **rooms, bool **arrived)
 	*rooms = create_empty_rooms(g_room_count);
 	*arrived = ft_calloc(num_ants, sizeof(bool));
 	if (*rooms == NULL || *arrived == NULL)
-	{
-		ft_printf("Failed to allocate memory");
-		exit(1);
-	}
+		ft_error("Failed to allocate memory");
 }
 
 void	move_single_ant(t_path **paths,
@@ -86,7 +83,7 @@ void	move_ants(t_path **paths, t_ant *ants, int num_ants, int end_room_id)
 	while (moved)
 	{
 		moved = false;
-		ft_memset(rooms, 0, num_ants * sizeof(int));
+		ft_memset(rooms, 0, g_room_count * sizeof(int));
 		process_ants_movement(&context);
 		if (moved)
 			ft_printf("\n");

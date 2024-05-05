@@ -30,10 +30,7 @@ void	exist_start_end(t_room *rooms)
 		current = current->next;
 	}
 	if (start != 1 || end != 1)
-	{
-		ft_printf("Invalid number of start or end.\n");
-		exit(1);
-	}
+		ft_error("Invalid number of start or end.\n");
 }
 
 int	check_solution(t_room *rooms)

@@ -50,19 +50,25 @@ t_link	*add_link_both_order(t_link **links, t_link_info *info, \
 	bool opposite)
 {
 	t_link	*new_link;
+	char	*start_name;
+	char	*end_name;
 
 	new_link = malloc(sizeof(t_link));
 	if (new_link == NULL)
+		ft_error("Memory allocation failed.\n");
+	start_name = get_room_name_by_id(info->rooms, \
+		get_room_id(info->rooms, info->start));
+	end_name = get_room_name_by_id(info->rooms, \
+		get_room_id(info->rooms, info->end));
+	if (start_name == NULL || end_name == NULL)
 	{
-		ft_printf("Memory allocation failed.\n");
-		exit(1);
+		free(new_link);
+		ft_error("Room name not found.\n");
 	}
 	new_link->start_id = get_room_id(info->rooms, info->start);
 	new_link->end_id = get_room_id(info->rooms, info->end);
-	new_link->start_name = ft_strdup(get_room_name_by_id(info->rooms, \
-		new_link->start_id));
-	new_link->end_name = ft_strdup(get_room_name_by_id(info->rooms, \
-		new_link->end_id));
+	new_link->start_name = ft_strdup(start_name);
+	new_link->end_name = ft_strdup(end_name);
 	new_link->opposite = opposite;
 	new_link->next = *links;
 	*links = new_link;

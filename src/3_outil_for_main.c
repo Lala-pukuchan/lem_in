@@ -51,6 +51,8 @@ t_path	*setup_simulation(t_simulation_config *config, t_room *rooms, \
 		config->end_room_id);
 	reverse_paths(&paths);
 	*path_count = count_paths(paths);
+	if (*path_count == 0)
+		ft_error("No path solution.");
 	output_details(config->number_of_ants, rooms, links);
 	return (paths);
 }

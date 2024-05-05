@@ -205,6 +205,8 @@ t_path				*setup_simulation(t_simulation_config *config, \
 						t_room *rooms, t_link *links, int *path_count);
 int					run_simulation(t_path *paths, int path_count, \
 						t_simulation_config *config);
+//4_outil_for_main
+void				ft_error(char *str);
 //ant.c
 int					find_best_path(t_distribution *dist);
 void				distribute_ants(t_path **paths, int num_paths, \
