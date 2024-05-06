@@ -14,3 +14,10 @@ lem_in % grep L res > lines
 lem_in % wc -l lines         
       90 lines
 ```
+
+## check performance
+```
+./lem-in < maps/7_big_superposition/3_big_superposition.txt > res && grep "L" res > lines && wc -l lines
+time ./lem-in < maps/7_big_superposition/3_big_superposition.txt
+valgrind --leak-check=full -s ./lem-in < maps/7_big_superposition/3_big_superposition.txt > res && grep "L" res > lines && wc -l lines
+```
