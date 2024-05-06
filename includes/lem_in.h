@@ -68,6 +68,7 @@ typedef struct s_ant_move_params
 	bool			*arrived;
 	int				end_room_id;
 }					t_ant_move_params;
+
 typedef struct s_distribution
 {
 	t_path			**paths;
@@ -164,7 +165,7 @@ int					*construct_path(int *predecessors, int path_length, \
 void				add_path_to_paths(t_path **paths, int *path, \
 						int path_length);
 void				update_queue_and_predecessors(t_find_path_params *params, \
-						int uId);
+						int uid);
 int					process_node(t_find_path_params *params, int uid);
 int					find_path(t_find_path_params *params);
 bool				exist_second_step(t_link *links, int start_room_id, \

@@ -31,18 +31,18 @@ void	add_path_to_paths(t_path **paths, int *path, int path_length)
 	*paths = new_path;
 }
 
-void	update_queue_and_predecessors(t_find_path_params *params, int uId)
+void	update_queue_and_predecessors(t_find_path_params *params, int uid)
 {
 	t_link	*link;
 
 	link = params->links;
 	while (link != NULL)
 	{
-		if (link->start_id == uId && !params->visited[link->end_id])
+		if (link->start_id == uid && !params->visited[link->end_id])
 		{
 			params->queue[params->rear++] = link->end_id;
 			params->visited[link->end_id] = 1;
-			params->predecessors[link->end_id] = uId;
+			params->predecessors[link->end_id] = uid;
 		}
 		link = link->next;
 	}
